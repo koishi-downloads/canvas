@@ -1,0 +1,9 @@
+{
+  "name": "nereid",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "nereid-cli": "^0.0.8"
+  }
+}
