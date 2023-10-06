@@ -1,0 +1,20 @@
+{
+  "name": "koishi-plugin-canvas",
+  "description": "nix",
+  "version": "0.0.1",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "author": "Anillc <void@anil.lc>",
+  "files": [
+    "lib"
+  ],
+  "peerDependencies": {
+    "koishi": "^4.15.0"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+    "@types/node": "^20.8.2",
+    "typescript": "^5.2.2"
+  }
+}
