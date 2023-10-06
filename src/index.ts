@@ -1,5 +1,5 @@
 import { platform } from 'os'
-import { Context, Schema } from 'koishi'
+import { Context, Logger, Schema } from 'koishi'
 import registry from 'get-registry'
 import { NereidTask } from 'koishi-plugin-downloads'
 import {} from 'koishi-plugin-nix'
@@ -16,12 +16,18 @@ export const Config: Schema<Config> = Schema.object({
 export const name = 'canvas'
 export const using = ['downloads']
 
+const logger = new Logger(name)
+
 export async function apply(ctx: Context) {
   const task = ctx.downloads.nereid(name, [
     `npm://@koishijs-assets/${name}?registry=${await registry()}`
   ], bucket())
   if (ctx.config.nix) {
-    ctx.using(['nix'], ctx => plugin(ctx, task))
+    ctx.using(['nix'], async ctx => {
+      const pkgs = await ctx.nix.packages('glibc.out', ['libuuid', 'lib'])
+      await ctx.nix.patchdir(await task.promise, pkgs.map(pkg => `${pkg}/lib`))
+      plugin(ctx, task)
+    })
   } else {
     plugin(ctx, task)
   }
@@ -29,6 +35,7 @@ export async function apply(ctx: Context) {
 
 async function plugin(ctx: Context, task: NereidTask) {
   await task.promise
+  logger.info(`${name} started`)
 }
 
 export function bucket() {

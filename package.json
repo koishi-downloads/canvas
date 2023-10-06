@@ -11,7 +11,7 @@
   "peerDependencies": {
     "koishi": "^4.15.0",
     "koishi-plugin-downloads": "^0.1.1",
-    "koishi-plugin-nix": "^0.0.1"
+    "koishi-plugin-nix": "^0.0.2"
   },
   "dependencies": {
     "get-registry": "^1.1.0"
