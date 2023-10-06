@@ -38,11 +38,11 @@
           commands = [{
             name = "init-subtree";
             help = "init subtree ${env.NAME}";
-            command = "git subtree --prefix=canvas add https://github.com/${env.REPO}.git ${env.VERSION} --squash";
+            command = "git subtree --prefix=${env.NAME} add https://github.com/${env.REPO}.git ${env.VERSION} --squash";
           } {
             name = "pull-subtree";
             help = "pull ${env.NAME} with tag ${env.VERSION}";
-            command = "git subtree --prefix=canvas pull ${env.VERSION} --squash";
+            command = "git subtree --prefix=${env.NAME} pull https://github.com/${env.REPO}.git ${env.VERSION} --squash";
           } {
             name = "build-nereid";
             command = "cd nereid && ./build.sh";
