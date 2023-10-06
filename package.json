@@ -14,6 +14,7 @@
     "koishi-plugin-nix": "^0.0.2"
   },
   "dependencies": {
+    "@koishijs/canvas": "^0.1.1",
     "get-registry": "^1.1.0"
   },
   "devDependencies": {
