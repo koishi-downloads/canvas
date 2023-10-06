@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -e
 
+yarn nereid-cli fetch-index npm://$NEREID
+
 rm -rf canvas-*
 for FOLDER in $FOLDERS; do
   FILE=$(mktemp)

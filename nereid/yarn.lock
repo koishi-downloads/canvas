@@ -795,21 +795,21 @@ negotiator@^0.6.3:
   resolved "https://registry.yarnpkg.com/negotiator/-/negotiator-0.6.3.tgz#58e323a72fedc0d6f9cd4d31fe49f51479590ccd"
   integrity sha512-+EUsqGPLsM+j/zdChZjsnX51g4XrHFOIXwfnCVPGlQk/k5giakcKsuxCObBRu6DSm9opw/O6slWbJdghQM4bBg==
 
-nereid-cli@^0.0.8:
-  version "0.0.8"
-  resolved "https://registry.yarnpkg.com/nereid-cli/-/nereid-cli-0.0.8.tgz#99ef2815e2613d6c5c8488ff0acf4f1f83ac9f1e"
-  integrity sha512-S+cvvmJKDo1pHF+ahPMeT8x/fA/JugWr3kCbkQTYy7zuUHaG99X02xVa3WuH0jwaPMfEWFV02Z2b7v1mLALuSQ==
+nereid-cli@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/nereid-cli/-/nereid-cli-0.1.0.tgz#7a3de5f4b94e3215e3fabd523668dd79fdbd9287"
+  integrity sha512-uwm2aCPg0dUGuGbUy7JIiJYeFgdqPQn+xoIlddQzY0jdAurVZkteONqXwX6M1yGJ5eIif0whkIovCPbDn5MU8g==
   dependencies:
     archiver "^5.3.1"
     cac "^6.7.14"
     libnpmpublish "^7.1.3"
-    nereid "^0.0.5"
+    nereid "^0.1.0"
     npm-registry-fetch "^14.0.4"
 
-nereid@^0.0.5:
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/nereid/-/nereid-0.0.5.tgz#497fd76d805bc366f410ca4bd919e4de09e54e8a"
-  integrity sha512-94w0iIvC2EwORtZjEg1s/AgujltlxMRNFokPzLT4+doxytIgdODh8FktrruMb3JShv2lP9f/h0br0XWaptCseQ==
+nereid@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/nereid/-/nereid-0.1.0.tgz#8cf995b5fa1df6e2c2f7f7c8736d1a9d37df7166"
+  integrity sha512-Xy2B6csOOtQqmjhge0PpTPfB+U4S0xlmtLpxG5ZeiuEaGxL/lJDTqp1SvDZFy6146tbmQzYsyNfzua1zxQFCCg==
   dependencies:
     axios "^1.3.1"
     tar-stream "^3.0.0"
@@ -1060,6 +1060,7 @@ streamx@^2.15.0:
     queue-tick "^1.0.1"
 
 "string-width-cjs@npm:string-width@^4.2.0", string-width@^4.1.0:
+  name string-width-cjs
   version "4.2.3"
   resolved "https://registry.yarnpkg.com/string-width/-/string-width-4.2.3.tgz#269c7117d27b05ad2e536830a8ec895ef9c6d010"
   integrity sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g==
@@ -1092,6 +1093,7 @@ string_decoder@~1.1.1:
     safe-buffer "~5.1.0"
 
 "strip-ansi-cjs@npm:strip-ansi@^6.0.1", strip-ansi@^6.0.0, strip-ansi@^6.0.1:
+  name strip-ansi-cjs
   version "6.0.1"
   resolved "https://registry.yarnpkg.com/strip-ansi/-/strip-ansi-6.0.1.tgz#9e26c63d30f53443e9489495b2105d37b67a85d9"
   integrity sha512-Y38VPSHcqkFrCpFnQ9vuSXmquuv5oXOKpGeT6aGrr3o3Gc9AlVa6JBfUSOCnbxGGZF+/0ooI7KrPuUSztUdU5A==

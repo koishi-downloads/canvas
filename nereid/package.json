@@ -4,6 +4,6 @@
   "main": "index.js",
   "license": "MIT",
   "devDependencies": {
-    "nereid-cli": "^0.0.8"
+    "nereid-cli": "^0.1.0"
   }
 }

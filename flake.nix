@@ -21,6 +21,7 @@
           VERSION = "v2.11.2";
           NODE_ABI_VERSIONS = lib.concatStringsSep " " abi;
           NODE_OS_LIST = lib.concatStringsSep " " os;
+          NEREID = "@koishijs-assets/canvas";
           FOLDERS = let
             set = lib.cartesianProductOfSets { inherit abi os; };
             list = map ({ abi, os }: "${NAME}-${VERSION}-node-v${abi}-${os}") set;
