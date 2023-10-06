@@ -49,6 +49,10 @@
           } {
             name = "pub-nereid";
             command = "cd nereid && ./pub.sh";
+          } {
+            name = "copy";
+            help = "copy dependencies to src";
+            command = "cd canvas && ./copy.sh";
           }];
         };
       };

@@ -1,4 +1,5 @@
 import { Context, Schema } from 'koishi'
+import registry from 'get-registry'
 import {} from 'koishi-plugin-downloads'
 import {} from 'koishi-plugin-nix'
 
@@ -11,7 +12,11 @@ export const Config: Schema<Config> = Schema.object({
 })
 
 export const name = 'canvas'
+export const using = ['downloads']
 
-export function apply(ctx: Context) {
-
+export async function apply(ctx: Context) {
+  // const task = ctx.downloads.nereid('ffmpeg', [
+  //   `npm://@koishijs-assets/canvas?registry=${await registry()}`
+  // ], bucket())
+  
 }
