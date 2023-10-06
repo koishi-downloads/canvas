@@ -1,6 +1,6 @@
 'use strict'
 
-const bindings = require('../build/Release/canvas.node')
+const bindings = require(globalThis['__prebuilt_canvas'])
 
 module.exports = bindings
 

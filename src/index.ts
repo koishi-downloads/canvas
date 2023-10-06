@@ -4,6 +4,7 @@ import registry from 'get-registry'
 import { NereidTask } from 'koishi-plugin-downloads'
 import {} from 'koishi-plugin-nix'
 import { version } from './dep/package.json'
+import { resolve } from 'path'
 
 export interface Config {
   nix: boolean
@@ -34,7 +35,9 @@ export async function apply(ctx: Context) {
 }
 
 async function plugin(ctx: Context, task: NereidTask) {
-  await task.promise
+  const path = await task.promise
+  globalThis[`__prebuilt_${name}`] = resolve(process.cwd(), `${path}/Release/canvas.node`)
+  console.log(require('./dep'))
   logger.info(`${name} started`)
 }
 

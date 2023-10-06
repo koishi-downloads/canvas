@@ -2,4 +2,4 @@
 set -eu
 
 rm -rf ../src/dep && mkdir -p ../src/dep
-cp -r lib package.json ../src/dep
+cp -r index.js lib package.json ../src/dep
