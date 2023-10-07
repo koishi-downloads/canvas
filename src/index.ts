@@ -7,6 +7,7 @@ import CanvasService, { Canvas } from '@koishijs/canvas'
 import { NereidTask } from 'koishi-plugin-downloads'
 import {} from 'koishi-plugin-nix'
 import dep from './dep/package.json'
+import type {} from './dep'
 
 export interface Config {
   nix: boolean
@@ -44,11 +45,9 @@ export async function bucket() {
 
 async function plugin(ctx: Context, task: NereidTask) {
   const path = await task.promise
-  console.log(path);
-  
-  // globalThis[`__prebuilt_${name}`] = resolve(process.cwd(), `${path}/Release/canvas.node`)
-  // ctx.plugin(NodeCanvasService, require('./dep'))
-  // logger.info(`${name} started`)
+  globalThis[`__prebuilt_${dep.name}`] = resolve(process.cwd(), `${path}/Release/canvas.node`)
+  ctx.plugin(NodeCanvasService, require('./dep'))
+  logger.info(`${name} started`)
 }
 
 export class NodeCanvasService extends CanvasService {
