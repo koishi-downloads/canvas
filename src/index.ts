@@ -1,11 +1,12 @@
-import { platform } from 'os'
+import { arch, platform } from 'os'
 import { resolve } from 'path'
 import registry from 'get-registry'
+import { family } from 'detect-libc'
 import { Context, Logger, Schema } from 'koishi'
 import CanvasService, { Canvas } from '@koishijs/canvas'
 import { NereidTask } from 'koishi-plugin-downloads'
 import {} from 'koishi-plugin-nix'
-import { version } from './dep/package.json'
+import dep from './dep/package.json'
 
 export interface Config {
   nix: boolean
@@ -22,11 +23,13 @@ const logger = new Logger(name)
 
 export async function apply(ctx: Context) {
   const task = ctx.downloads.nereid(name, [
-    `npm://@koishijs-assets/${name}?registry=${await registry()}`
-  ], bucket())
+    `npm://@koishijs-assets/${dep.name}?registry=${await registry()}`
+  ], await bucket())
   if (ctx.config.nix) {
     ctx.using(['nix'], async ctx => {
-      const pkgs = await ctx.nix.packages('glibc.out', ['glibc', 'libgcc'], ['libuuid', 'lib'])
+      const pkgs = await ctx.nix.packages(
+        'glibc.out', ['glibc', 'libgcc'], ['stdenv.cc.cc', 'lib'], ['fontconfig', 'lib']
+      )
       await ctx.nix.patchdir(await task.promise, pkgs.map(pkg => `${pkg}/lib`))
       plugin(ctx, task)
     })
@@ -35,29 +38,17 @@ export async function apply(ctx: Context) {
   }
 }
 
-async function plugin(ctx: Context, task: NereidTask) {
-  const path = await task.promise
-  globalThis[`__prebuilt_${name}`] = resolve(process.cwd(), `${path}/Release/canvas.node`)
-  ctx.plugin(NodeCanvasService, require('./dep'))
-  logger.info(`${name} started`)
+export async function bucket() {
+  return `${dep.name}-v${dep.version}-${platform()}-${arch()}-napi-v6-${await family() || 'unknown'}`
 }
 
-export function bucket() {
-  let os: string
-  switch (platform()) {
-    case 'linux':
-      os = 'linux-glibc-x64'
-      break
-    case 'darwin':
-      os = 'darwin-unknown-x64'
-      break
-    case 'win32':
-      os = 'win32-unknown-x64'
-      break
-    default:
-      throw new Error('unsupported platform')
-  }
-  return `${name}-v${version}-node-v${process.versions.modules}-${os}`
+async function plugin(ctx: Context, task: NereidTask) {
+  const path = await task.promise
+  console.log(path);
+  
+  // globalThis[`__prebuilt_${name}`] = resolve(process.cwd(), `${path}/Release/canvas.node`)
+  // ctx.plugin(NodeCanvasService, require('./dep'))
+  // logger.info(`${name} started`)
 }
 
 export class NodeCanvasService extends CanvasService {

@@ -9,7 +9,8 @@ yarn nereid-cli fetch-index npm://$NEREID
 for FOLDER in $FOLDERS; do
   FILE=$(mktemp)
   curl -o $FILE -L "$URL_PREFIX/$FOLDER.tar.gz"
-  mkdir $NAME-$FOLDER && tar xzvf $FILE -C $NAME-$FOLDER
+  OUT=$NAME-$VERSION-$FOLDER
+  mkdir $OUT && tar xzvf $FILE -C $OUT
   rm $FILE
-  ../node_modules/.bin/nereid-cli build $NAME-$FOLDER
+  ../node_modules/.bin/nereid-cli build $OUT
 done

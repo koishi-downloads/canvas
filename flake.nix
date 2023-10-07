@@ -54,7 +54,7 @@
           } {
             name = "copy";
             help = "copy dependencies to src";
-            command = "cd canvas && ./copy.sh";
+            command = "cd ${env.NAME} && ./copy.sh";
           }];
         };
       };

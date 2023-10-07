@@ -12,3 +12,4 @@ target
 test/assets/Oswald
 test/assets/Raleway
 /*.*
+!copy.sh
