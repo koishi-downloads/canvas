@@ -13,19 +13,20 @@
       perSystem = { config, pkgs, lib, system, ... }: let
         # =======================================================================
         # configuration
-        abi = map toString [ 64 67 72 79 83 102 108 111 115 ];
-        os = [ "linux-glibc-x64" "darwin-unknown-x64" "win32-unknown-x64" ];
+        folders = [
+          "linux-x64-napi-v6-glibc"
+          "linux-x64-napi-v6-musl"
+          "linux-arm-napi-v6-glibc"
+          "win32-x64-napi-v6-unknown"
+          "darwin-x64-napi-v6-unknown"
+        ];
         env = rec {
-          NAME = "canvas";
-          REPO = "Automattic/node-canvas";
-          VERSION = "v2.11.2";
-          NODE_ABI_VERSIONS = lib.concatStringsSep " " abi;
-          NODE_OS_LIST = lib.concatStringsSep " " os;
-          NEREID = "@koishijs-assets/canvas";
-          FOLDERS = let
-            set = lib.cartesianProductOfSets { inherit abi os; };
-            list = map ({ abi, os }: "${NAME}-${VERSION}-node-v${abi}-${os}") set;
-          in lib.concatStringsSep " " list;
+          NAME = "skia-canvas";
+          REPO = "samizdatco/skia-canvas";
+          VERSION = "v1.0.1";
+          NEREID = "@koishijs-assets/skia-canvas";
+          URL_PREFIX = "https://skia-canvas.s3.us-east-1.amazonaws.com/${VERSION}";
+          FOLDERS = lib.concatStringsSep " " folders;
         };
         # =======================================================================
       in {

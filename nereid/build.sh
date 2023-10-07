@@ -1,13 +1,15 @@
 #!/usr/bin/env bash
 set -e
 
+rm -rf build && mkdir build
+cd build
+
 yarn nereid-cli fetch-index npm://$NEREID
 
-rm -rf canvas-*
 for FOLDER in $FOLDERS; do
   FILE=$(mktemp)
-  curl -o $FILE -L https://github.com/$REPO/releases/download/$VERSION/$FOLDER.tar.gz
-  mkdir $FOLDER && tar xzvf $FILE -C $FOLDER
+  curl -o $FILE -L "$URL_PREFIX/$FOLDER.tar.gz"
+  mkdir $NAME-$FOLDER && tar xzvf $FILE -C $NAME-$FOLDER
   rm $FILE
-  yarn nereid-cli build $FOLDER
+  ../node_modules/.bin/nereid-cli build $NAME-$FOLDER
 done

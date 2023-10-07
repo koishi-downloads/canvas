@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
 set -eu
 
-yarn nereid-cli pub $NEREID
+cd build
+../node_modules/.bin/nereid-cli pub $NEREID
