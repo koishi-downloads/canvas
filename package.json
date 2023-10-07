@@ -16,7 +16,10 @@
   "dependencies": {
     "@koishijs/canvas": "^0.1.1",
     "detect-libc": "^2.0.2",
-    "get-registry": "^1.1.0"
+    "get-registry": "^1.1.0",
+    "glob": "^8.0.3",
+    "simple-get": "^4.0.1",
+    "string-split-by": "^1.0.0"
   },
   "devDependencies": {
     "@types/node": "^20.8.2",
