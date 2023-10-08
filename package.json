@@ -8,6 +8,13 @@
   "files": [
     "lib"
   ],
+  "koishi": {
+    "service": {
+      "optional": [
+        "nix"
+      ]
+    }
+  },
   "peerDependencies": {
     "koishi": "^4.15.0",
     "koishi-plugin-downloads": "^0.1.1",

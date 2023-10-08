@@ -7,7 +7,6 @@ import CanvasService, { Canvas } from '@koishijs/canvas'
 import { NereidTask } from 'koishi-plugin-downloads'
 import {} from 'koishi-plugin-nix'
 import dep from './dep/package.json'
-import type {} from './dep'
 
 export interface Config {
   nix: boolean
@@ -28,10 +27,12 @@ export async function apply(ctx: Context) {
   ], await bucket())
   if (ctx.config.nix) {
     ctx.using(['nix'], async ctx => {
-      const pkgs = await ctx.nix.packages(
-        'glibc.out', ['glibc', 'libgcc'], ['stdenv.cc.cc', 'lib'], ['fontconfig', 'lib']
-      )
-      await ctx.nix.patchdir(await task.promise, pkgs.map(pkg => `${pkg}/lib`))
+      if (ctx.nix.avaliable) {
+        const pkgs = await ctx.nix.packages(
+          'glibc.out', ['glibc', 'libgcc'], ['stdenv.cc.cc', 'lib'], ['fontconfig', 'lib']
+        )
+        await ctx.nix.patchdir(await task.promise, pkgs.map(pkg => `${pkg}/lib`))
+      }
       plugin(ctx, task)
     })
   } else {
@@ -51,11 +52,11 @@ async function plugin(ctx: Context, task: NereidTask) {
 }
 
 export class NodeCanvasService extends CanvasService {
-  constructor(ctx: Context, public nodeCanvas: any) {
+  constructor(ctx: Context, public skia: any) {
     super(ctx)
   }
 
   async createCanvas(width: number, height: number): Promise<Canvas> {
-    return this.nodeCanvas.createCanvas(width, height)
+    return new this.skia.Canvas(width, height)
   }
 }
