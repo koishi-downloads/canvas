@@ -1,7 +1,7 @@
 {
   "name": "koishi-plugin-canvas",
-  "description": "nix",
-  "version": "0.0.1",
+  "description": "canvas service for Koishi",
+  "version": "0.2.0",
   "license": "MIT",
   "main": "lib/index.js",
   "author": "Anillc <void@anil.lc>",
@@ -12,6 +12,9 @@
     "service": {
       "optional": [
         "nix"
+      ],
+      "implements": [
+        "canvas"
       ]
     }
   },
@@ -21,7 +24,7 @@
     "koishi-plugin-nix": "^0.0.3"
   },
   "dependencies": {
-    "@koishijs/canvas": "^0.1.1",
+    "@koishijs/canvas": "^0.2.0",
     "detect-libc": "^2.0.2",
     "get-registry": "^1.1.0",
     "glob": "^8.0.3",

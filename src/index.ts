@@ -3,7 +3,7 @@ import { resolve } from 'path'
 import registry from 'get-registry'
 import { family } from 'detect-libc'
 import { Context, Logger, Schema } from 'koishi'
-import CanvasService, { Canvas } from '@koishijs/canvas'
+import CanvasService, { Canvas, Image } from '@koishijs/canvas'
 import { NereidTask } from 'koishi-plugin-downloads'
 import {} from 'koishi-plugin-nix'
 import dep from './dep/package.json'
@@ -58,5 +58,12 @@ export class NodeCanvasService extends CanvasService {
 
   async createCanvas(width: number, height: number): Promise<Canvas> {
     return new this.skia.Canvas(width, height)
+  }
+
+  async loadImage(source: string | URL | Buffer | ArrayBufferLike): Promise<Image> {
+    if (typeof source === 'string' || source instanceof URL) {
+      return await this.skia.loadImage(source.toString())
+    }
+    return this.skia.loadImage(Buffer.from(source))
   }
 }
