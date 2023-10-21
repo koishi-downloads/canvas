@@ -3,7 +3,6 @@
   "compilerOptions": {
     "rootDir": "src",
     "outDir": "lib",
-    "allowJs": true,
     "module": "CommonJS",
     "target": "ES2020",
     "declaration": true,

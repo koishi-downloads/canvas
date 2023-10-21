@@ -53,8 +53,12 @@
             command = "cd nereid && ./pub.sh";
           } {
             name = "copy";
-            help = "copy dependencies to src";
+            help = "copy dependencies to src and lib";
             command = "cd ${env.NAME} && ./copy.sh";
+          } {
+            name = "build";
+            help = "build";
+            command = "copy && yarn tsc";
           }];
         };
       };
