@@ -3,10 +3,11 @@ import { resolve } from 'path'
 import registry from 'get-registry'
 import { family } from 'detect-libc'
 import { Context, Logger, Schema } from 'koishi'
-import CanvasService, { Canvas, Image } from '@koishijs/canvas'
+import CanvasService, { Canvas, CanvasRenderingContext2D, Image } from '@koishijs/canvas'
 import { NereidTask } from 'koishi-plugin-downloads'
 import {} from 'koishi-plugin-nix'
 import dep from './dep/package.json'
+import type * as Skia from './dep'
 
 export interface Config {
   nix: boolean
@@ -47,17 +48,18 @@ export async function bucket() {
 async function plugin(ctx: Context, task: NereidTask) {
   const path = await task.promise
   globalThis[`__prebuilt_${dep.name}`] = resolve(process.cwd(), `${path}/v6/index.node`)
-  ctx.plugin(NodeCanvasService, require('./dep'))
+  ctx.plugin(SkiaCanvasService, require('./dep'))
   logger.info(`${name} started`)
 }
 
-export class NodeCanvasService extends CanvasService {
+export class SkiaCanvasService extends CanvasService {
   constructor(ctx: Context, public skia: any) {
     super(ctx)
   }
 
   async createCanvas(width: number, height: number): Promise<Canvas> {
-    return new this.skia.Canvas(width, height)
+    const canvas = new this.skia.Canvas(width, height)
+    return new SikaCanvas(canvas)
   }
 
   async loadImage(source: string | URL | Buffer | ArrayBufferLike): Promise<Image> {
@@ -66,4 +68,30 @@ export class NodeCanvasService extends CanvasService {
     }
     return this.skia.loadImage(Buffer.from(source))
   }
+}
+
+export class SikaCanvas implements Canvas {
+  constructor(public canvas: Skia.Canvas) {}
+
+  get width() {
+    return this.canvas.width
+  }
+
+  get height() {
+    return this.canvas.width
+  }
+
+  getContext(type: '2d') {
+    return this.canvas.getContext(type) as any
+  }
+
+  async toBuffer(type: 'image/png') {
+    return await this.canvas.toBuffer('png')
+  }
+
+  async toDataURL(type: 'image/png') {
+    return await this.canvas.toDataURL('png')
+  }
+
+  async dispose() {}
 }
