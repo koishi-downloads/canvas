@@ -1,7 +1,7 @@
 {
   "name": "koishi-plugin-canvas",
   "description": "canvas service for Koishi",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "license": "MIT",
   "main": "lib/index.js",
   "author": "Anillc <void@anil.lc>",
